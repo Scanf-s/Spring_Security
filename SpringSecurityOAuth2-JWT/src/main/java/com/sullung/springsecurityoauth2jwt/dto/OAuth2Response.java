@@ -2,18 +2,14 @@ package com.sullung.springsecurityoauth2jwt.dto;
 
 public interface OAuth2Response {
 
-    // Provider (naver, google, kakao, ...)
+    //제공자 (Ex. naver, google, ...)
     String getProvider();
-
-    // Provider ID
+    //제공자에서 발급해주는 아이디(번호)
     String getProviderId();
-
-    // NickName
-    String getNickName();
-
-    // Profile Image
-    String getProfileImage();
-
-    // Email
+    //이메일
     String getEmail();
+    //사용자 실명 (설정한 이름)
+    String getName();
+    //프로필 URL
+    String getProfileUrl();
 }

@@ -5,9 +5,13 @@ import java.util.Optional;
 
 public class KakaoResponseDto implements OAuth2Response {
     private final Map<String, Object> attributes;
+    private final Map<String, Object> properties;
+    private final Map<String, Object> kakaoAccount;
 
     public KakaoResponseDto(Map<String, Object> attributes) {
         this.attributes = attributes;
+        this.properties = (Map<String, Object>) attributes.get("properties");
+        this.kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
     }
 
     @Override
@@ -17,34 +21,21 @@ public class KakaoResponseDto implements OAuth2Response {
 
     @Override
     public String getProviderId() {
-        return Optional.ofNullable(attributes.get("id"))
-                .map(Object::toString)
-                .orElse(null);
-    }
-
-    @Override
-    public String getNickName() {
-        return Optional.ofNullable(attributes.get("kakao_account"))
-                .map(account -> (Map<String, Object>) account)
-                .map(account -> (Map<String, Object>) account.get("profile"))
-                .map(profile -> (String) profile.get("nickname"))
-                .orElse(null);
-    }
-
-    @Override
-    public String getProfileImage() {
-        return Optional.ofNullable(attributes.get("kakao_account"))
-                .map(account -> (Map<String, Object>) account)
-                .map(account -> (Map<String, Object>) account.get("profile"))
-                .map(profile -> (String) profile.get("profile_image_url"))
-                .orElse(null);
+        return attributes.get("id").toString();
     }
 
     @Override
     public String getEmail() {
-        return Optional.ofNullable(attributes.get("kakao_account"))
-                .map(account -> (Map<String, Object>) account)
-                .map(account -> (String) account.get("email"))
-                .orElse(null);
+        return kakaoAccount != null ? (String) kakaoAccount.get("email") : null;
+    }
+
+    @Override
+    public String getName() {
+        return properties != null ? (String) properties.get("nickname") : null;
+    }
+
+    @Override
+    public String getProfileUrl() {
+        return properties != null ? (String) properties.get("profile_image") : null;
     }
 }

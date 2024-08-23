@@ -21,12 +21,12 @@ public class GoogleResponseDto implements OAuth2Response {
     }
 
     @Override
-    public String getNickName() {
-        return attributes.get("name").toString();
+    public String getName() {
+        return "Google Nickname";
     }
 
     @Override
-    public String getProfileImage() {
+    public String getProfileUrl() {
         return attributes.get("picture").toString();
     }
 

@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PersonalController {
 
-    @GetMapping
-    public ResponseEntity<String> personalGet() {
+    @GetMapping("/")
+    public ResponseEntity<String> publicGet() {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("Private API - GET");
+                .body("Public API - GET");
+    }
+
+    @GetMapping("/my")
+    public ResponseEntity<String> myData() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("My data (private) - GET");
     }
 }

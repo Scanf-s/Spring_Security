@@ -21,17 +21,17 @@ public class NaverResponseDto implements OAuth2Response {
     }
 
     @Override
-    public String getNickName() {
-        return attributes.get("name").toString();
-    }
-
-    @Override
-    public String getProfileImage() {
-        return attributes.get("profile_image").toString();
-    }
-
-    @Override
     public String getEmail() {
         return attributes.get("email").toString();
+    }
+
+    @Override
+    public String getName() {
+        return attributes.get("nickname").toString();
+    }
+
+    @Override
+    public String getProfileUrl() {
+        return attributes.get("profile_image").toString();
     }
 }
